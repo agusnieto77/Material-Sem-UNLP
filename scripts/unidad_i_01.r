@@ -1,4 +1,5 @@
 # Unidad I
+
 # Introducción a las ciencias sociales computacionales y a las humanidades digitales
 # ✅ Introducción a la sintaxis básica 
 # La sintaxis en R es parecida a la de otros lenguajes de programación. 

@@ -40,11 +40,7 @@ url
 
 # creamos el objeto 'file' para definir el lugar donde guardar el documento a bajar, con funciones base de r
 
-file <- 
-  base::file.path(
-    ".", 
-    base::basename(
-      url))
+file <- base::file.path(".", base::basename(url))
 
 file
 
