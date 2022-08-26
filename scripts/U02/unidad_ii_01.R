@@ -4,9 +4,11 @@
 # PAQUETES ----------------------------------------------------------------
 
 # Paquetes a instalar
+install.packages('DT')
 install.packages('ACEP')
 
 # Paquetes a cargar
+require(DT)
 require(ACEP)
 require(dplyr)
 require(ggplot2)
@@ -335,6 +337,9 @@ cat("\014")
 
 # Imprimimos solo 20 filas
 print(conflictos_lc, n = 20)
+
+# Creamos una tabla dinámica
+datatable(conflictos_lc |> select(-nota))
 
 # Limpiamos la consola
 cat("\014")
