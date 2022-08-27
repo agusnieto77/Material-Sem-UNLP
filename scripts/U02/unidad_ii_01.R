@@ -4,8 +4,8 @@
 # PAQUETES ----------------------------------------------------------------
 
 # Paquetes a instalar
-install.packages('DT')
-install.packages('ACEP')
+# install.packages('DT')
+# install.packages('ACEP')
 
 # Paquetes a cargar
 require(DT)
@@ -439,7 +439,7 @@ barplot(frecuencia ~ año,
         main="Hostilidad [dicc. Palazzo | titulos + bajadas + notas]",
         col=rgb(0.1,0.9,0.1,0.6))
 
-# Vizualizamos con ggplot2
+# Visualizamos con ggplot2
 ggplot(tabla_conf_gp_anio) +
   geom_bar(aes(x=año,y=frecuencia), 
            fill = 'skyblue',
