@@ -42,3 +42,6 @@ for(link in links[1:9]){
 
 # Corremos el for para extraer el contenido de los primeros 9 links escrapeados con  el for anterior y crear un data.frame
 for (i in 1:length(links[1:9])) {mundo_gremial <- rbind(mundo_gremial, data.frame(fecha=fechas[i], titular=titulares[i], nota=notas[i], hiper=hipers[i]))}
+
+# Imprimir
+mundo_gremial |> tibble()

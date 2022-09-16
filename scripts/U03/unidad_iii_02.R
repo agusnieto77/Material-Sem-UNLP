@@ -76,4 +76,4 @@ for (i in 1:length(links[1:9])) {
 }
 
 # Imprimir
-mundo_gremial
+mundo_gremial |> tibble()

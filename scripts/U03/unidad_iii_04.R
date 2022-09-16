@@ -27,7 +27,7 @@ la_nacion <- data.frame()
 links <- append(links, read_html(url) |> html_elements('.com-title.--xs a') |> html_attr('href')) |> url_absolute(url)
 
 # Corremos el for para extraer el contenido de los primeros 9 links escrapeados con el for anterior
-for(link in links[1:9]){
+for(link in links[10:19]){
   fechas    <- append(fechas,    read_html(link) |> html_elements('.com-date.--twoxs') |> html_text2())
   titulares <- append(titulares, read_html(link) |> html_elements('.com-title.--threexl') |> html_text2())
   notas     <- append(notas,     read_html(link) |> html_elements('.com-paragraph') |> html_text2() |> list())
@@ -35,7 +35,16 @@ for(link in links[1:9]){
 }
 
 # Corremos el for para extraer el contenido de los primeros 9 links escrapeados con  el for anterior y crear un data.frame
-for(i in 1:length(links[1:9])) {la_nacion <- rbind(la_nacion, data.frame(fecha=fechas[i], titular=titulares[i], nota=paste0(notas[[i]], collapse = ' | '), hiper=hipers[i]))}
+for(i in 1:length(links[10:19])) {la_nacion <- rbind(la_nacion, data.frame(fecha=fechas[i], titular=titulares[i], nota=paste0(notas[[i]], collapse = ' | '), hiper=hipers[i]))}
+
+# Armamos el data.frame con los vectores sin iterar
+df_ln <- tibble(fechas = fechas,
+                titulo = titulares,
+                notas  = notas,
+                links  = hipers)
 
 # Imprimir
-la_nacion
+df_ln |> tibble() |> select(fechas, notas)
+
+# Imprimir
+la_nacion |> tibble() |> select(fecha, nota)

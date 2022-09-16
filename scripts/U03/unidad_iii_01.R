@@ -9,6 +9,8 @@ library(rvest)
 library(lubridate) 
 # Formato JSON 
 library(jsonlite)
+#
+require(htmltidy)
 
 
 # Parte II - Documentos de texto, imágenes, etc. --------------------------
@@ -42,6 +44,15 @@ html <- read_html(url)
 
 # Imprimir 
 html
+
+# Imprimir con toString()
+cat(toString(html))
+
+# Imprimir con la función tidy_html() 
+cat(tidy_html(url(url), list(TidyDocType="html5", TidyWrapLen=200)))
+
+# Imprimir con la función tidy_html() los elementos que componen la página 
+tidy_html(httr::content(httr::GET(url), as="raw"))
 
 # Selección de nodos de fecha 
 fechas <- html |> html_elements(xpath='//*[contains(@class, "com-date")]') |> html_text2()
@@ -86,6 +97,9 @@ json <- toJSON(datos)
 # Imprimir 
 json
 
+# Imprimir con la función prettify()
+prettify(json)
+
 # Formatear los resultados de la minería en formato tibble
 df <- unnest(fromJSON(json), cols = c(fecha, titular, link))
 
@@ -98,7 +112,7 @@ rm(list = ls())
 # Limpiamos la consola
 cat("\014")
 
-# Parte II - Datos estructurados ------------------------------------------
+# Parte IV - Datos estructurados ------------------------------------------
 
 # Creamos el objeto 'url' en base a un link de Wikipedia
 url <- 'https://es.wikipedia.org/wiki/Demograf%C3%ADa_de_Argentina'
@@ -122,7 +136,7 @@ print(tablas[[1]], n = 24)
 tablas[c(3,1)]
 
 # Imprimir solo la 2ª
-print(tablas[[2]], n = 37)
+print(tablas[[2]], n = 162)
 
 # Borramos todos los objetos creados
 rm(list = ls())
