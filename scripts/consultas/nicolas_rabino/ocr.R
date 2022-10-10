@@ -5,6 +5,7 @@ require(tidyverse)
 #require(pdftools) # Esta librería es para PDFs
 require(tesseract)
 require(magick)
+require(tidytext)
 
 #notas <- pdf_ocr_text('seminario Agustin/6-Junio/1997-06-05.jpg', 
                       #language = "spa") # Especificamos el idioma para el OCR
@@ -62,3 +63,47 @@ tabla_comparada_mejorada <- tabla_comparada |> mutate(
 )
 
 tabla_comparada_mejorada$ocr_imagen_procesada
+
+# Con imágenes de 2005
+
+(DSC00326 <- ocr(image_read("scripts/consultas/nicolas_rabino/fotos/DSC00326.JPG"), 
+               engine = tesseract('spa')))
+
+(DSC00326A <- ocr(image_read("scripts/consultas/nicolas_rabino/fotos/DSC00326A.JPG"), 
+                engine = tesseract('spa')))
+
+(DSC00326B <- ocr(image_read("scripts/consultas/nicolas_rabino/fotos/DSC00326B.JPG"), 
+               engine = tesseract('spa')))
+
+tabla <- tibble(nota = c(DSC00326A, DSC00326B))
+
+tabla <- tabla |> unnest_tokens(output = palabras, input = nota, token = 'words')
+
+tabla |> count(palabras) |> filter(nchar(palabras) > 2) |> arrange(desc(n)) |> 
+  filter(!palabras %in% c(tm::stopwords('es'), 'dela','dores','horas','mar')) |> 
+  head(20) |> 
+  ggplot() +
+  geom_bar(aes(x = fct_reorder(palabras, n), y = n, fill = n), stat = 'identity') +
+  coord_flip() +
+  scale_fill_gradient2() +
+  labs(x = 'Palabras', y = 'Frecuencia') +
+  theme_bw() +
+  theme(legend.title = element_blank(),
+        text = element_text(size = 14))
+
+tablab <- tibble(nota = DSC00326)
+
+tablab <- tablab |> unnest_tokens(output = palabras, input = nota, token = 'words')
+
+tablab |> count(palabras) |> filter(nchar(palabras) > 2) |> arrange(desc(n)) |> 
+  filter(!palabras %in% c(tm::stopwords('es'), 'dela','dores','horas','mar','aaa','ayer')) |> 
+  head(20) |> 
+  ggplot() +
+  geom_bar(aes(x = fct_reorder(palabras, n), y = n, fill = n), stat = 'identity') +
+  coord_flip() +
+  scale_fill_gradient2() +
+  labs(x = 'Palabras', y = 'Frecuencia') +
+  theme_bw() +
+  theme(legend.title = element_blank(),
+        text = element_text(size = 14))
+         
