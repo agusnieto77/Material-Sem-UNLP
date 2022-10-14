@@ -661,8 +661,13 @@ table(notas_clas_5$clase, notas_clas_5$clase_tm, dnn = c("Etiq Manual", "Etiq t�
 
 # Referencias de interés --------------------------------------------------
 
+# Cosine-SVM: https://www.naturalspublishing.com/files/published/2b29o974c204v6.pdf
 # Blei, David M., Andrew Y. Ng, and Michael I. Jordan. 2003. “Latent Dirichlet Allocation.” The Journal of Machine Learning Research 3(1): 993-1022.
 # Lu, B., Ott, M., Cardie, C., & Tsou, B. K. 2011. “Multi-aspect sentiment analysis with topic models". Proceeding of the 2011 IEEE 11th International Conference on Data Mining Workshops, 81–88.
+
 # Documentación
 # textreuse: https://cran.r-project.org/web/packages/textreuse/vignettes/textreuse-introduction.html
 # r-for-newspaper-data: https://bookdown.org/yann_ryan/r-for-newspaper-data/detecting-text-reuse-in-newspaper-articles-.html
+
+# Glosarios tags
+# https://cs.nyu.edu/~grishman/jet/guide/PennPOS.html
